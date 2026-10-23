@@ -1,0 +1,52 @@
+---
+import "../styles/global.css";
+import SiteFooter from "../components/SiteFooter.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: string;
+  backgroundClass?: string;
+  bodyClass?: string;
+}
+
+const {
+  title = "Frontend Mentor | Launch countdown timer",
+  description = "Launch countdown timer built with Astro and Tailwind CSS.",
+  lang = "en",
+  backgroundClass = "bg-stars",
+  bodyClass = "",
+} = Astro.props;
+---
+
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon-32x32.png"
+    />
+    <title>{title}</title>
+    <slot name="head" />
+  </head>
+  <body
+    class:list={[
+      "min-h-screen w-full flex flex-col bg-slate-900",
+      backgroundClass,
+      bodyClass,
+    ]}
+  >
+    <slot />
+    <SiteFooter />
+  </body>
+</html>
