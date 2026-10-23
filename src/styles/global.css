@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --color-lavender-300: hsl(237 18% 59%);
+  --color-pink-100: hsl(345 95% 68%);
+  --color-slate-700: hsl(236 21% 26%);
+  --color-slate-800: hsl(235 16% 14%);
+  --color-slate-900: hsl(234 17% 12%);
+  --color-white: hsl(0 0% 100%);
+
+  --font-red-hat: "Red Hat Text", sans-serif;
+
+  --color-card-bg: var(--color-slate-700);
+  --color-text-pink: var(--color-pink-100);
+  --color-text-gray: var(--color-lavender-300);
+}
+
+.bg-stars {
+  background-image: url('/images/bg-stars.svg');
+}
+
+.bg-hills {
+  background-image: url('/images/pattern-hills.svg');
+  background-size: cover;
+  background-position: right bottom;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-red-hat);
+    font-weight: 700;
+    background-color: var(--color-slate-900);
+    color: var(--color-white);
+  }
+
+  body {
+    min-height: 100vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
