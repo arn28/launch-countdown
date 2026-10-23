@@ -1,0 +1,52 @@
+{
+  "layout_schema": {
+    "viewport": {
+      "type": "main_container",
+      "styles": "min-h-screen w-full flex flex-col justify-between items-center relative overflow-hidden",
+      "background_elements": {
+        "stars": "absolute top-0 left-0 w-full h-full object-cover z-0",
+        "hills_silhouette": "absolute bottom-0 w-full object-cover z-0"
+      }
+    },
+    "content_wrapper": {
+      "type": "section",
+      "styles": "flex flex-col items-center justify-center flex-grow z-10 w-full px-4 mt-20",
+      "children": [
+        {
+          "type": "header",
+          "content": "WE'RE LAUNCHING SOON",
+          "styles": "text-white uppercase tracking-[0.3em] md:tracking-[0.5em] text-sm md:text-lg mb-16 text-center font-semibold"
+        },
+        {
+          "type": "countdown_grid",
+          "styles": "flex flex-row justify-center gap-3 md:gap-6",
+          "item_structure": {
+            "wrapper": "flex flex-col items-center gap-4",
+            "card": {
+              "styles": "relative bg-[var(--card-bg)] text-[var(--text-pink)] text-4xl md:text-7xl font-bold rounded-lg shadow-lg flex items-center justify-center w-20 h-20 md:w-36 md:h-36 overflow-hidden",
+              "decoration": "Pseudo-elemento o div absoluto para simular la línea divisoria horizontal del reloj estilo 'flip'"
+            },
+            "label": {
+              "styles": "text-[var(--text-gray)] uppercase tracking-[0.2em] text-[10px] md:text-xs font-medium"
+            }
+          },
+          "items": [
+            { "label": "DAYS", "value": "08" },
+            { "label": "HOURS", "value": "23" },
+            { "label": "MINUTES", "value": "55" },
+            { "label": "SECONDS", "value": "41" }
+          ]
+        }
+      ]
+    },
+    "footer": {
+      "type": "footer",
+      "styles": "flex flex-row justify-center gap-6 z-10 pb-8 md:pb-12 w-full",
+      "children": [
+        { "type": "icon", "name": "facebook", "styles": "w-6 h-6 text-gray-400 hover:text-white cursor-pointer transition-colors" },
+        { "type": "icon", "name": "pinterest", "styles": "w-6 h-6 text-gray-400 hover:text-white cursor-pointer transition-colors" },
+        { "type": "icon", "name": "instagram", "styles": "w-6 h-6 text-gray-400 hover:text-white cursor-pointer transition-colors" }
+      ]
+    }
+  }
+}
