@@ -2,10 +2,10 @@
 import CountdownUnit from "./CountdownUnit.astro";
 
 const units = [
-  { unit: "days", value: "14", label: "Days" },
-  { unit: "hours", value: "23", label: "Hours" },
-  { unit: "minutes", value: "55", label: "Minutes" },
-  { unit: "seconds", value: "41", label: "Seconds" },
+  { unit: "days", value: "00", label: "Days" },
+  { unit: "hours", value: "00", label: "Hours" },
+  { unit: "minutes", value: "00", label: "Minutes" },
+  { unit: "seconds", value: "00", label: "Seconds" },
 ];
 ---
 
@@ -21,3 +21,5 @@ const units = [
     ))
   }
 </div>
+
+<script src="../scripts/countdown.ts"></script>
