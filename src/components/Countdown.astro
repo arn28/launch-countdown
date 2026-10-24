@@ -1,0 +1,18 @@
+---
+import CountdownUnit from "./CountdownUnit.astro";
+
+const units = [
+  { unit: "days", value: "14", label: "Days" },
+  { unit: "hours", value: "23", label: "Hours" },
+  { unit: "minutes", value: "55", label: "Minutes" },
+  { unit: "seconds", value: "41", label: "Seconds" },
+];
+---
+
+<div class="flex justify-center gap-2.5 min-[375px]:gap-3 md:gap-6">
+  {
+    units.map(({ unit, value, label }) => (
+      <CountdownUnit unit={unit} value={value} label={label} />
+    ))
+  }
+</div>

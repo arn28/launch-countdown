@@ -1,0 +1,29 @@
+---
+const links = [
+  { name: "Facebook", icon: "/images/icon-facebook.svg" },
+  { name: "Pinterest", icon: "/images/icon-pinterest.svg" },
+  { name: "Instagram", icon: "/images/icon-instagram.svg" },
+];
+---
+
+<div class="flex gap-8">
+  {
+    links.map(({ name, icon }) => (
+      <a
+        href="#"
+        aria-label={name}
+        class="social-icon inline-flex items-center justify-center w-11 h-11 transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-pink rounded-full"
+      >
+        <img src={icon} alt="" aria-hidden="true" class="w-6 h-6" />
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .social-icon:hover img,
+  .social-icon:focus-visible img {
+    filter: invert(53%) sepia(50%) saturate(4156%) hue-rotate(314deg)
+      brightness(101%) contrast(97%);
+  }
+</style>
