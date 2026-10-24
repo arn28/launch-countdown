@@ -9,7 +9,12 @@ const units = [
 ];
 ---
 
-<div class="flex justify-center gap-2.5 min-[375px]:gap-3 md:gap-6">
+<div
+  class="flex justify-center gap-2.5 min-[375px]:gap-3 md:gap-6"
+  role="timer"
+  aria-live="off"
+  aria-label="Launch countdown"
+>
   {
     units.map(({ unit, value, label }) => (
       <CountdownUnit unit={unit} value={value} label={label} />

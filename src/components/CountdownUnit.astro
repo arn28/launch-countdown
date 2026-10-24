@@ -12,9 +12,11 @@ const { unit, value, label } = Astro.props;
   <div
     class="flip-card relative flex items-center justify-center overflow-hidden bg-card-bg rounded-md md:rounded-lg shadow-[0_8px_0_var(--color-slate-900)] w-16 h-16 min-[375px]:w-20 min-[375px]:h-20 md:w-36 md:h-36"
     data-unit={unit}
+    aria-label={`${label}: ${value}`}
   >
     <span
       class="countdown-value text-text-pink text-4xl md:text-7xl font-bold z-20"
+      aria-hidden="true"
       >{value}</span
     >
     <div
@@ -24,6 +26,7 @@ const { unit, value, label } = Astro.props;
   </div>
   <span
     class="text-text-gray text-[0.5rem] min-[375px]:text-[0.625rem] md:text-sm tracking-[0.3em] uppercase"
+    aria-hidden="true"
     >{label}</span
   >
 </div>
