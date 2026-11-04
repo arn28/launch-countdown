@@ -10,18 +10,53 @@ const { unit, value, label } = Astro.props;
 
 <div class="flex flex-col items-center gap-4 md:gap-6">
   <div
-    class="flip-card relative flex items-center justify-center overflow-hidden bg-card-bg rounded-md md:rounded-lg shadow-[0_8px_0_var(--color-slate-900)] w-16 h-16 min-[375px]:w-20 min-[375px]:h-20 md:w-36 md:h-36"
+    class="flip-container relative"
     data-unit={unit}
     aria-label={`${label}: ${value}`}
   >
-    <span
-      class="countdown-value text-text-pink text-4xl md:text-7xl font-bold z-20"
-      aria-hidden="true"
-      >{value}</span
-    >
     <div
-      class="absolute top-0 left-0 w-full h-1/2 bg-black/10 rounded-t-md md:rounded-t-lg"
+      class="flip-card relative w-16 h-16 min-[375px]:w-20 min-[375px]:h-20 md:w-36 md:h-36"
     >
+      <div
+        class="flip-top absolute top-0 left-0 w-full h-1/2 overflow-hidden bg-card-bg rounded-t-md md:rounded-t-lg"
+      >
+        <span
+          class="flip-top-value absolute left-0 w-full text-center text-text-pink text-4xl md:text-7xl font-bold"
+          aria-hidden="true"
+          >{value}</span
+        >
+      </div>
+      <div
+        class="flip-bottom absolute bottom-0 left-0 w-full h-1/2 overflow-hidden bg-card-bg rounded-b-md md:rounded-b-lg shadow-[0_8px_0_var(--color-slate-900)]"
+      >
+        <span
+          class="flip-bottom-value absolute left-0 w-full text-center text-text-pink text-4xl md:text-7xl font-bold"
+          aria-hidden="true"
+          >{value}</span
+        >
+      </div>
+      <div
+        class="flip-flap absolute top-0 left-0 w-full h-1/2 overflow-hidden origin-bottom bg-card-bg rounded-t-md md:rounded-t-lg"
+      >
+        <span
+          class="flip-flap-value absolute left-0 w-full text-center text-text-pink text-4xl md:text-7xl font-bold"
+          aria-hidden="true"
+          >{value}</span
+        >
+      </div>
+      <div
+        class="flip-flap-back absolute bottom-0 left-0 w-full h-1/2 overflow-hidden origin-top bg-card-bg rounded-b-md md:rounded-b-lg [transform:rotateX(90deg)]"
+      >
+        <span
+          class="flip-flap-back-value absolute left-0 w-full text-center text-text-pink text-4xl md:text-7xl font-bold"
+          aria-hidden="true"
+          >{value}</span
+        >
+      </div>
+      <div
+        class="absolute top-1/2 left-0 right-0 h-[1px] bg-black/25 z-30"
+      >
+      </div>
     </div>
   </div>
   <span
@@ -32,14 +67,86 @@ const { unit, value, label } = Astro.props;
 </div>
 
 <style>
-  .flip-card::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background-color: rgba(0, 0, 0, 0.25);
-    z-index: 10;
+  .flip-container {
+    perspective: 600px;
+  }
+
+  .flip-card {
+    transform-style: preserve-3d;
+  }
+
+  .flip-top-value,
+  .flip-flap-value {
+    top: 0;
+    line-height: 4rem;
+  }
+
+  .flip-bottom-value,
+  .flip-flap-back-value {
+    bottom: 0;
+    line-height: 4rem;
+  }
+
+  .flip-container.flip .flip-flap {
+    animation: flipTop 0.6s ease-in forwards;
+  }
+
+  .flip-container.flip .flip-flap-back {
+    animation: flipBottom 0.6s ease-out 0.3s forwards;
+  }
+
+  @keyframes flipTop {
+    0% {
+      transform: rotateX(0deg);
+      z-index: 20;
+    }
+    50% {
+      transform: rotateX(-90deg);
+      z-index: 20;
+    }
+    100% {
+      transform: rotateX(-90deg);
+      z-index: 10;
+    }
+  }
+
+  @keyframes flipBottom {
+    0% {
+      transform: rotateX(90deg);
+      z-index: 10;
+    }
+    50% {
+      transform: rotateX(0deg);
+      z-index: 10;
+    }
+    100% {
+      transform: rotateX(0deg);
+      z-index: 20;
+    }
+  }
+
+  @media (min-width: 375px) {
+    .flip-top-value,
+    .flip-bottom-value,
+    .flip-flap-value,
+    .flip-flap-back-value {
+      line-height: 5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .flip-top-value,
+    .flip-bottom-value,
+    .flip-flap-value,
+    .flip-flap-back-value {
+      line-height: 9rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flip-container.flip .flip-flap,
+    .flip-container.flip .flip-flap-back {
+      animation: none;
+    }
   }
 </style>

@@ -6,6 +6,10 @@ function initCountdown() {
   const targetTime = Date.now() + COUNTDOWN_DAYS * 24 * 60 * 60 * 1000;
   const units = document.querySelectorAll<HTMLElement>("[data-unit]");
 
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
   function update() {
     const remaining = targetTime - Date.now();
     const parts = getTimeParts(remaining);
@@ -19,18 +23,50 @@ function initCountdown() {
       if (unit === "minutes") value = formatValue(parts.minutes);
       if (unit === "seconds") value = formatValue(parts.seconds);
 
-      const valueEl = unitEl.querySelector<HTMLElement>(".countdown-value");
-      const label = unitEl.getAttribute("aria-label")?.split(":")[0]?.trim() || unit;
+      const label =
+        unitEl.getAttribute("aria-label")?.split(":")[0]?.trim() || unit || "";
+      const topValues = unitEl.querySelectorAll<HTMLElement>(".flip-top-value");
+      const bottomValues =
+        unitEl.querySelectorAll<HTMLElement>(".flip-bottom-value");
+      const flapValue = unitEl.querySelector<HTMLElement>(".flip-flap-value");
+      const flapBackValue =
+        unitEl.querySelector<HTMLElement>(".flip-flap-back-value");
 
-      if (valueEl && valueEl.textContent !== value) {
-        valueEl.textContent = value;
+      const currentValues = [
+        ...Array.from(topValues),
+        ...Array.from(bottomValues),
+      ].map((el) => el.textContent);
+
+      if (currentValues.length > 0 && currentValues[0] === value) {
         unitEl.setAttribute("aria-label", `${label}: ${value}`);
-      } else if (valueEl && valueEl.textContent === value) {
-        unitEl.setAttribute("aria-label", `${label}: ${value}`);
-      } else if (valueEl) {
-        valueEl.textContent = value;
-        unitEl.setAttribute("aria-label", `${label}: ${value}`);
+        return;
       }
+
+      if (!reduceMotion && flapValue && flapBackValue) {
+        const oldValue = currentValues[0] || value;
+
+        topValues.forEach((el) => (el.textContent = value));
+
+        flapValue.textContent = oldValue;
+        flapBackValue.textContent = value;
+
+        unitEl.classList.remove("flip");
+        void unitEl.offsetWidth;
+        unitEl.classList.add("flip");
+
+        setTimeout(() => {
+          topValues.forEach((el) => (el.textContent = value));
+          bottomValues.forEach((el) => (el.textContent = value));
+          flapValue.textContent = value;
+        }, 600);
+      } else {
+        topValues.forEach((el) => (el.textContent = value));
+        bottomValues.forEach((el) => (el.textContent = value));
+        if (flapValue) flapValue.textContent = value;
+        if (flapBackValue) flapBackValue.textContent = value;
+      }
+
+      unitEl.setAttribute("aria-label", `${label}: ${value}`);
     });
 
     if (remaining <= 0) {
