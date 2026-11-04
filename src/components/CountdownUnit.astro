@@ -12,6 +12,7 @@ const { unit, value, label } = Astro.props;
   <div
     class="flip-container relative"
     data-unit={unit}
+    role="group"
     aria-label={`${label}: ${value}`}
   >
     <div
