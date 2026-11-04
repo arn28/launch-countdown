@@ -80,7 +80,7 @@ Users should be able to:
 
 I used **OpenCode (GLM)** during this project:
 
-- **Implementation plan** — the project was built phase by phase following a Plan file, so every step (tokens, layout, a11y, logic, animation) was verifiable before moving on.
+- **Implementation plan** — the project was built phase by phase following `docs/PLAN.md`, so every step (tokens, layout, a11y, logic, animation) was verifiable before moving on.
 - **Debugging the flip animation** — iterating on the split-flap sequence (top flap falls, bottom flap lands) until the value handoff looked right.
 - **QA pass** — running Lighthouse against the production build, which caught an invalid `aria-label` on a plain `div` (fixed by making each unit a labeled `role="group"`).
 

@@ -1,8 +1,11 @@
 ---
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 const links = [
-  { name: "Facebook", icon: "/images/icon-facebook.svg" },
-  { name: "Pinterest", icon: "/images/icon-pinterest.svg" },
-  { name: "Instagram", icon: "/images/icon-instagram.svg" },
+  { name: "Facebook", icon: `${base}images/icon-facebook.svg` },
+  { name: "Pinterest", icon: `${base}images/icon-pinterest.svg` },
+  { name: "Instagram", icon: `${base}images/icon-instagram.svg` },
 ];
 ---
 

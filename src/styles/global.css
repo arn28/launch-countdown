@@ -16,11 +16,11 @@
 }
 
 .bg-stars {
-  background-image: url('/images/bg-stars.svg');
+  background-image: var(--bg-stars);
 }
 
 .bg-hills {
-  background-image: url('/images/pattern-hills.svg');
+  background-image: var(--pattern-hills);
   background-size: cover;
   background-position: right bottom;
 }
